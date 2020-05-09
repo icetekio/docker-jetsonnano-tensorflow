@@ -1,0 +1,18 @@
+# Pipeline for the IceCI continues integration
+# For more information visit:
+#  https://github.com/IceCI/IceCI
+#  https://iceci.io/
+# Documentation can be found at
+#  https://docs.iceci.io/
+steps:
+- name: build-image
+  # Runtime profile needs to point to your NVIDIA Jetson Nano
+  # in the k8s cluster via node selector or resource requests.
+  runtimeProfile: jetsonml
+  containerBuild:
+    imageName: jetson-nano-tensorflow
+    user: icetekio
+    dockerSecret: dockerhub
+    tags:
+    - latest
+    - "{{ ICE_GIT_TAG_OR_BRANCH }}"
